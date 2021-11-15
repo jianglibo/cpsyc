@@ -1,0 +1,10 @@
+
+jasypt:
+  encryptor:
+    password: ${CPSYC_JASYPT_PASSWORD}
+
+pusher:
+  app_id: 1297074
+  key: ENC(m+y8QYJLQdvePttMQ6pQixD/2L0osVGOnVRtpNsKIqAOB3+go6lTyc6gR+PF5I6yTdNRpSieABoyab4JigsY5A==)
+  secret: ENC(Oz6xCLEFpORaJJgvFChrJlf94EaZkKSk5TG3Fm3+esK02dzdWAI+xOdVwsEyujXgDmpmAtsu4bT4n5jOHhYe/Q==)
+  cluster: eu
