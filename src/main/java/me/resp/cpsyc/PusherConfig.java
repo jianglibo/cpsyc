@@ -11,8 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PusherConfig {
-	private String app_id;
-	private String key;
-	private String secret;
-	private String cluster;
+  private String app_id;
+  private String key;
+  private String secret;
+  private String cluster;
 }

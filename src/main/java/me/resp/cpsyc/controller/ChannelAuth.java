@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/pusher")
-public class PusherTrigger {
+@RequestMapping("/channel")
+public class ChannelAuth {
 
   private final Pusher pusher;
 
@@ -19,7 +19,7 @@ public class PusherTrigger {
    * @param pusher
    */
   @Autowired
-  public PusherTrigger(Pusher pusher) {
+  public ChannelAuth(Pusher pusher) {
     this.pusher = pusher;
   }
 

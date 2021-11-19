@@ -8,3 +8,8 @@ pusher:
   key: ENC(m+y8QYJLQdvePttMQ6pQixD/2L0osVGOnVRtpNsKIqAOB3+go6lTyc6gR+PF5I6yTdNRpSieABoyab4JigsY5A==)
   secret: ENC(Oz6xCLEFpORaJJgvFChrJlf94EaZkKSk5TG3Fm3+esK02dzdWAI+xOdVwsEyujXgDmpmAtsu4bT4n5jOHhYe/Q==)
   cluster: eu
+
+app:
+  fauna-admin-secret: ENC(QpuKlwqx2Mwwe+jSWdqUR3SXNxCF+8ERYpXkzD9+gvXGLJIw6wQCoelk+14ItLc+LudmM7qDV00SpMRjAAl1sMCZk5lv7DEyZuzDCZ4IdD0=)
+  fauna-server-secret: ENC(vTf4BXEMTEQwlePoLpdRinJTG3qkNDyg7YdDn8+irmEeK2rwAb2qFO1irvJuZBc0KCCrNZDkB8aY6z3BXC6ZtVBmmhDn+QXg5rPs2vl6j8s=)
+  fauna-endpoint: https://db.fauna.com/

@@ -1,0 +1,28 @@
+mutation CreateCpMessage {
+   createCpMessage(data: {
+   	content: "content"
+   }) {
+       _id
+       content
+   }
+}
+
+query FindCpMessageByID {
+   findCpMessageByID(id: "315529669822644811") {
+       content
+   }
+}
+
+mutation updateCpMessage {
+   updateCpMessage(id: "315529669822644811", data: {
+       content: "Build two awesome apps!"
+   }) {
+       content
+   }
+}
+
+mutation DeleteCpMessage {
+   deleteCpMessage(id: "315529669822644811") {
+       content
+   }
+}
