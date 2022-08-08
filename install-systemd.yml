@@ -1,0 +1,81 @@
+---
+- name: install copy paster sync systemd in target server.
+  # gather_facts: false
+  gather_facts: true
+  # hosts: localhost
+  hosts: servers
+  # vars_files:
+  #   - config.cfg
+  #   - vars/sec.yml
+  # ansible-playbook --vault-id mailhandler@/opt/mailhandler.pwd  install-systemd.yml
+  vars_files:
+    - external_vars.yml
+  tasks:
+    # - name: just failed
+    #   fail:
+    #     msg: "{{ app.user }}"
+    - name: os environment
+      debug:
+        msg: "{{ ansible_facts['distribution_major_version'] }}"
+    - name: install jre.
+      apt:
+        pkg:
+          - openjdk-11-jre-headless
+    - name: prepare jar file.
+      block:
+        - name: find jar file.
+          find:
+            path: build/libs
+            recurse: no
+            pattern: "*.jar"
+          register: found_jar_files
+          delegate_to: localhost
+        - name: display found_jar_files.
+          debug:
+            var: found_jar_files
+        - name: Get latest file
+          set_fact:
+            latest_jar_file: "{{ found_jar_files.files | sort(attribute='mtime',reverse=true) | first }}"
+        - name: "add user {{ app_name }}"
+          user:
+            name: "{{ app.user }}"
+            shell: /usr/sbin/nologin
+        - name: Create a directory if it does not exist
+          file:
+            path: "{{ item }}"
+            state: directory
+            mode: "0755"
+            owner: "{{ app.user }}"
+            group: "{{ app.user }}"
+          loop:
+            - "{{ app.base }}"
+            - "/opt/downloads/{{ app_name }}"
+            - "/opt/{{ app_name }}/setting"
+        - name: copy jar
+          copy:
+            src: "{{ latest_jar_file.path }}"
+            dest: "{{ app.execute_jar }}"
+            owner: "{{ app.user }}"
+            group: "{{ app.user }}"
+            mode: "0755"
+    - name: "create {{ app_name }} linux service"
+      block:
+        - name: create config file by template.
+          template:
+            src: "{{ app_name }}.env.j2"
+            dest: "{{ app.environment_file }}"
+        - name: Create Unit file
+          template:
+            src: "{{ app_name }}.service.j2"
+            dest: "{{ app.unit_file }}"
+            mode: 644
+          notify:
+            - reload systemctl
+        - name: Restart service
+          service:
+            name: "{{ app_name }}.service"
+            state: restarted
+            enabled: yes
+  handlers:
+    - name: reload systemctl
+      command: systemctl daemon-reload

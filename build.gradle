@@ -8,6 +8,10 @@ group = 'me.resp'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+tasks.named('bootJar') {
+    launchScript()
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor

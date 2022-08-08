@@ -1,7 +1,23 @@
 
+server:
+  port: 8080
+
+logging:
+  file:
+    path: ${SPRING_LOGS_DIR:logs}
+  logback:
+    rollingpolicy:
+      max-history: 10
+      max-file-size: 10MB
+  level:
+    root: ${SPRING_ROOT_LOG_LEVEL:INFO}
+  
 jasypt:
   encryptor:
     password: ${CPSYC_JASYPT_PASSWORD}
+    property:
+      prefix: "ENC("
+      suffix: ")"
 
 pusher:
   app_id: 1297074

@@ -1,0 +1,12 @@
+[Unit]
+Description={{app.description}}
+After=syslog.target
+
+[Service]
+User={{app.user}}
+ExecStart={{app.execute_jar}}
+SuccessExitStatus=143
+EnvironmentFile={{ app.environment_file | default("/etc/sysconfig/" + app_name)}}
+
+[Install]
+WantedBy=multi-user.target

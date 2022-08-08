@@ -4,14 +4,13 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-import com.pusher.rest.Pusher;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.pusher.rest.Pusher;
 
 import me.resp.cpsyc.CpsycConstants;
 import me.resp.cpsyc.FaunaUtil;
@@ -26,7 +25,6 @@ public class ChannelQuery {
   private final FaunaUtil faunaUtil;
 
   /** @param pusher */
-  @Autowired
   public ChannelQuery(Pusher pusher, FaunaUtil faunaUtil) {
     this.pusher = pusher;
     this.faunaUtil = faunaUtil;
